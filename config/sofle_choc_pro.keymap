@@ -14,6 +14,8 @@
 #define LOWER 1
 #define RAISE 2
 #define ADJUST 3
+#define MAC 4
+#define EXTRA 5
 
 / {
 
@@ -49,7 +51,7 @@
     };
 
     lower_layer {
-      display-name = "lower";
+      display-name = "symbol";
       // ------------------------------------------------------------------------------------------------------------
       // |       |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
       // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |  F12  |
@@ -68,7 +70,7 @@
     };
 
     raise_layer {
-      display-name = "raise";
+      display-name = "nav";
       // ------------------------------------------------------------------------------------------------------------
       // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |      |      |       |      |       |       |
       // |       | INS  | PSCR | GUI   |       |      |                | PGUP |      |   ^   |      |       |       |
@@ -101,6 +103,25 @@
         &none             &none           &none           &none           &none           &none            &rgb_ug RGB_TOG &none  &none &none &none &none &none &none
         &none           &none           &none           &none            &none           &none  &none &none &none &none
       >;
+    };
+
+    mac_layer {
+      display-name = "mac";
+      // ------------------------------------------------------------------------------------------------------------
+      // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
+      // |  ESC  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
+      // |  TAB  |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
+      // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  | PLAY  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
+      //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
+      bindings = <
+        &kp GRAVE &kp N1 &kp N2   &kp N3   &kp N4    &kp N5                           &kp N6 &kp N7    &kp N8    &kp N9   &kp N0   &kp GRAVE
+        &kp ESC   &kp Q  &kp W    &kp E    &kp R     &kp T                            &kp Y  &kp U     &kp I     &kp O    &kp P    &kp BSPC
+        &kp TAB   &kp A  &kp S    &kp D    &kp F     &kp G                            &kp H  &kp J     &kp K     &kp L    &kp SEMI &kp SQT
+        &kp LSHFT &kp Z  &kp X    &kp C    &kp V     &kp B   &kp C_MUTE &kp C_PLAY    &kp N  &kp M     &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
+        &kp LGUI &kp LALT &kp LCTRL &mo LOWER  &kp RET    &kp SPACE  &mo RAISE  &kp RCTRL &kp RALT  &kp RGUI
+      >;
+
+      sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp C_PREV C_NEXT>;
     };
   };
 };
